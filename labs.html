@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEBULA Labs — Glass Experiments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050714;--text:#e8edff;--muted:#8a95b5;--brand:#8ab0ff;--brand-2:#a78bfa;--glass:rgba(255,255,255,.08);--border:rgba(255,255,255,.18)}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(800px 400px at 100% 0%,#7aa2ff22,transparent 60%),radial-gradient(1000px 500px at 0% 100%,#a78bfa22,transparent 60%),#050714;color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif}
+    main{max-width:1100px;margin:0 auto;padding:60px 20px}
+    a{color:inherit;text-decoration:none}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:linear-gradient(180deg,var(--brand),#4f8dff);color:#fff;font-weight:700;border:1px solid #fff1}
+    .ghost{background:transparent;border-color:#fff2}
+    .glass{background:var(--glass);backdrop-filter:saturate(160%) blur(12px);-webkit-backdrop-filter:saturate(160%) blur(12px);border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 25px #0008}
+    h1{font-size:clamp(28px,6vw,56px);line-height:1.06;margin:.4em 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .card{padding:18px}
+    .lead{color:var(--muted)}
+    .canvas{display:block;width:100%;height:320px;border-radius:14px;background:#0b0f25;border:1px solid #ffffff12}
+    @media (max-width: 900px){.grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a class="btn ghost" href="./" id="back">← Back to Home</a>
+      <a class="btn" href="#">Get Started</a>
+    </header>
+
+    <section class="glass" style="padding:18px 18px 6px">
+      <p style="font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#22d3ee">Experiments</p>
+      <h1>NEBULA Labs — <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Glass Edition</span></h1>
+      <p class="lead">Drop your WebGL, Canvas, or shader demos here. This page is intentionally lightweight and isolated from the landing.</p>
+    </section>
+
+    <div class="grid" style="margin-top:18px">
+      <article class="glass card">
+        <h3>Canvas Playground</h3>
+        <p class="lead">A minimal canvas setup you can hack on.</p>
+        <canvas class="canvas" id="c"></canvas>
+      </article>
+      <article class="glass card">
+        <h3>GSAP/Three‑ready</h3>
+        <p class="lead">Paste your GSAP or Three.js snippet — no bundler needed.</p>
+      </article>
+      <article class="glass card">
+        <h3>Ideas</h3>
+        <p class="lead">Particle shader, metaballs, audio‑reactive bars, etc.</p>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    // Gentle fade‑in
+    document.body.style.opacity='0';
+    document.body.style.transition='opacity .25s ease';
+    requestAnimationFrame(()=>document.body.style.opacity='1');
+
+    // Tiny canvas demo
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const DPR = Math.max(1, window.devicePixelRatio || 1);
+    function size(){ canvas.width = canvas.clientWidth * DPR; canvas.height = canvas.clientHeight * DPR; }
+    size();
+    window.addEventListener('resize', size);
+    const dots = Array.from({length:80},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6}));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(const d of dots){
+        d.x+=d.vx; d.y+=d.vy;
+        if(d.x<0||d.x>canvas.width) d.vx*=-1;
+        if(d.y<0||d.y>canvas.height) d.vy*=-1;
+        ctx.fillStyle = 'rgba(138,176,255,.9)';
+        ctx.beginPath(); ctx.arc(d.x,d.y,2*DPR,0,6.283); ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    // Smooth back navigation
+    document.getElementById('back').addEventListener('click', (e)=>{ e.preventDefault(); document.body.style.opacity='0'; setTimeout(()=>{ window.location.href = './'; }, 220); })
+  </script>
+</body>
+</html>
