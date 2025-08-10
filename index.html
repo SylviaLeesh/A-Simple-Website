@@ -3,161 +3,92 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NEBULA — Glassmorphism Landing</title>
-  <meta name="description" content="Futuristic glassmorphism landing with neon atmosphere, particles, smooth transitions, and a Labs page."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>NEBULA — Ultra Glass (Parallax + Iris) — BUILD_20250810_033029</title>
+  <!-- BUILD_20250810_033029 : Ultra Glass + Parallax Shards + Iris route transition -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#050714;--text:#e9eeff;--muted:#99a4c6;--brand:#8ab0ff;--brand-2:#a78bfa;--accent:#22d3ee;
-      --glass: rgba(255,255,255,.08);
-      --border: rgba(255,255,255,.18);
-      --radius:18px;--shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
-      background:radial-gradient(900px 500px at 100% 0%, #7aa2ff22, transparent 60%),
-                 radial-gradient(1000px 500px at 0% 100%, #a78bfa22, transparent 60%), #050714;overflow-x:hidden}
-    .grid{position:fixed;inset:-10% -10% 0 -10%;z-index:-2;opacity:.22;pointer-events:none;
-      transform:perspective(900px) rotateX(60deg) translateY(-15%);
-      background-image: linear-gradient(transparent calc(100% - 1px), #7aa2ff55 1px),
-                       linear-gradient(90deg, transparent calc(100% - 1px), #7aa2ff55 1px);
-      background-size:88px 88px;filter: drop-shadow(0 0 8px #7aa2ff55)}
-    .particles{position:fixed;inset:0;z-index:-1;pointer-events:none}
-    .p{position:absolute;width:2px;height:2px;border-radius:50%;background:radial-gradient(circle,#b8cbff,transparent 60%);opacity:.9;animation:float var(--t) linear infinite}
-    @keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
-    .glass{background:var(--glass);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);
-      border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    header{position:sticky;top:0;z-index:50;border-bottom:1px solid #ffffff14}
-    .nav{max-width:1200px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
-    .logo{width:32px;height:32px;border-radius:10px;background:conic-gradient(from 200deg, var(--brand), var(--accent), var(--brand-2), var(--brand));box-shadow:inset 0 0 0 1px #fff2,0 10px 24px #0008}
-    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    :root {--bg:#050714;--text:#e8edff;--muted:#8a95b5;--brand:#8ab0ff;--brand2:#a78bfa;--accent:#22d3ee;--glass:rgba(255,255,255,.08);--border:rgba(255,255,255,.18)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
     a{color:inherit;text-decoration:none}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:11px 16px;border-radius:12px;background:linear-gradient(180deg,var(--brand),#4f8dff);color:#fff;font-weight:700;letter-spacing:.2px;border:1px solid #fff1;box-shadow:0 10px 20px #0008;transition:transform .12s ease,filter .2s ease}
-    .btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
-    .ghost{background:transparent;border-color:#fff2;color:var(--text)}
-    main{max-width:1200px;margin:0 auto;padding:0 20px}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;padding:96px 0 48px}
-    .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}
-    h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin:.25em 0}
-    .sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:60ch}
-    .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-    .demo{position:relative;padding:14px;border-radius:20px}
-    .frame{overflow:hidden}
-    .frame img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
-    .section{padding:74px 0}
-    .section h2{font-size:clamp(26px,5vw,40px);margin:0 0 10px}
-    .lead{color:var(--muted)}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-    .card{padding:18px}
-    .icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:inline-grid;place-items:center;color:#fff;font-weight:800}
-    .tiles{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:22px}
-    .tile{padding:22px;display:flex;flex-direction:column;gap:10px}
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
-    .reveal.in{opacity:1;transform:none}
-    footer{border-top:1px solid #ffffff14;color:var(--muted);padding:24px 0;margin-top:40px}
-    @media (max-width: 980px){.hero{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:1fr}}
-    @media (max-width: 640px){.grid3{grid-template-columns:1fr}}
+    header{display:flex;justify-content:space-between;align-items:center;padding:20px;background:var(--glass);backdrop-filter:blur(15px) saturate(150%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000}
+    .btn{padding:10px 18px;border-radius:12px;background:linear-gradient(180deg,var(--brand),#4f8dff);color:#fff;font-weight:700;box-shadow:0 8px 20px #0008;transition:transform .2s ease}
+    .btn:hover{transform:translateY(-2px) scale(1.03)}
+    .glass{background:var(--glass);backdrop-filter:blur(14px) saturate(160%);border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 30px #0008}
+    main{padding:40px;max-width:1200px;margin:auto}
+    h1{font-size:clamp(32px,6vw,56px);background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+    p.lead{color:var(--muted);font-size:1.2rem}
+    /* Build badge */
+    .badge{position:fixed;right:10px;top:10px;z-index:2001;padding:6px 10px;border-radius:10px;background:linear-gradient(180deg,var(--brand),var(--brand2));color:#fff;font-weight:800;border:1px solid #fff3;box-shadow:0 8px 18px #0009;user-select:none}
+    /* Parallax shards */
+    #parallax {position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+    .shard {position:absolute;border-radius:14px;backdrop-filter:blur(10px) saturate(160%);background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));border:1px solid var(--border);box-shadow:0 14px 36px #0009;opacity:.45}
+    .shard.badge{padding:10px 14px;font-weight:800;color:#fff;opacity:.75}
+    /* Iris overlay */
+    .iris{position:fixed;inset:0;z-index:2000;background:var(--bg);--x:50vw;--y:50vh;clip-path:circle(0 at var(--x) var(--y))}
+    .iris.active{animation:irisOpen .38s ease forwards}
+    @keyframes irisOpen{to{clip-path:circle(150vmax at var(--x) var(--y))}}
   </style>
 </head>
 <body>
-  <div class="grid"></div>
-  <div class="particles" id="particles"></div>
+  <div class="badge">BUILD_20250810_033029</div>
+  <div id="parallax"></div>
+  <div class="iris" id="iris"></div>
 
-  <header class="glass">
-    <div class="nav">
-      <a class="brand" href="#home"><span class="logo"></span><span>NEBULA</span></a>
-      <nav><ul><li><a href="#features">Features</a></li><li><a href="#showcase">Showcase</a></li><li><a href="#pricing">Pricing</a></li></ul></nav>
-      <div style="display:flex;gap:10px">
-        <a class="btn ghost" href="labs.html" data-xnav>Enter Lab →</a>
-        <a class="btn" href="#cta">Get Started</a>
-      </div>
-    </div>
+  <header>
+    <h2>NEBULA</h2>
+    <nav style="display:flex;gap:10px;align-items:center">
+      <a href="#features" class="btn" style="background:transparent;border:1px solid #ffffff33;color:#e8edff">Features</a>
+      <a href="labs.html" class="btn" id="enterLab">Enter Lab →</a>
+    </nav>
   </header>
 
-  <main id="home">
-    <section class="hero">
-      <div>
-        <p class="kicker">Glassmorphism Edition</p>
-        <h1>Crystal‑clear interfaces with <span style="background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">cinematic motion</span></h1>
-        <p class="sub">Frosted‑glass panels, neon atmosphere, particle ambience, and buttery scroll reveals. Deployed on GitHub Pages in minutes.</p>
-        <div class="cta">
-          <a class="btn" href="#features">Explore Features</a>
-          <a class="btn ghost" href="labs.html" data-xnav aria-label="Go to Labs">Enter Lab →</a>
-        </div>
-        <div class="tiles">
-          <article class="glass tile reveal">
-            <h3>Labs Portal</h3>
-            <p class="lead">Click below to jump into our experimental page with room for WebGL/Canvas demos.</p>
-            <div><a class="btn" href="labs.html" data-xnav>Open Labs</a></div>
-          </article>
-          <article class="glass tile reveal">
-            <h3>Live Status</h3>
-            <p class="lead">99.98% uptime, edge‑cached, zero build.</p>
-          </article>
-        </div>
-      </div>
-      <div class="demo reveal">
-        <div class="glass frame">
-          <img alt="mock" src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='750'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%238ab0ff'/><stop offset='1' stop-color='%23a78bfa'/></linearGradient></defs><rect width='1200' height='750' fill='%23050714'/><g fill='url(%23g)' opacity='.9'><rect x='60' y='60' rx='18' ry='18' width='1080' height='120'/><rect x='60' y='220' rx='18' ry='18' width='520' height='180'/><rect x='620' y='220' rx='18' ry='18' width='520' height='180'/><rect x='60' y='420' rx='18' ry='18' width='1080' height='260'/></g></svg>"> 
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="section">
-      <h2 class="reveal">All the shine, zero framework</h2>
-      <p class="lead reveal">Pure HTML/CSS/JS with GPU‑accelerated transitions and accessible motion.</p>
-      <div class="grid3">
-        <article class="glass card reveal"><span class="icon">🧊</span><h3>Glass Panels</h3><p class="lead">Frosted translucency with backdrop blur and soft borders.</p></article>
-        <article class="glass card reveal"><span class="icon">✨</span><h3>Micro‑interactions</h3><p class="lead">Hover lift, focus rings, reveal‑on‑scroll.</p></article>
-        <article class="glass card reveal"><span class="icon">🛰️</span><h3>Neon Atmosphere</h3><p class="lead">Gradient grid, floating particles, depth.</p></article>
-      </div>
-    </section>
-
-    <section id="showcase" class="section">
-      <h2 class="reveal">Showcase</h2>
-      <p class="lead reveal">Hover and scroll — everything is crisp and snappy.</p>
-      <div class="grid3">
-        <article class="glass card reveal"><h3>Parallax</h3><p class="lead">Subtle camera drift that’s battery‑friendly.</p></article>
-        <article class="glass card reveal"><h3>3D Tilt</h3><p class="lead">Pointer‑driven depth with glare.</p></article>
-        <article class="glass card reveal"><h3>Marquee</h3><p class="lead">Seamless ticker powered by CSS only.</p></article>
-      </div>
-    </section>
-
-    <section id="pricing" class="section">
-      <h2 class="reveal">Simple pricing</h2>
-      <p class="lead reveal">Start free. Upgrade when you’re ready.</p>
-      <div class="grid3">
-        <article class="glass card reveal"><h3>Free</h3><p class="lead">$0 / mo — All animations.</p><a class="btn ghost" href="#">Use Free</a></article>
-        <article class="glass card reveal"><h3>Pro</h3><p class="lead">$9 / mo — Priority support.</p><a class="btn" href="#">Go Pro</a></article>
-        <article class="glass card reveal"><h3>Team</h3><p class="lead">$29 / mo — Team features.</p><a class="btn ghost" href="#">Contact</a></article>
-      </div>
+  <main>
+    <section class="glass" style="padding:28px;position:relative;overflow:hidden">
+      <h1>Ultra Glass Homepage — BUILD_20250810_033029</h1>
+      <p class="lead">Glassmorphism, <b>parallax shards/badges</b>, and cinematic <b>iris transition</b> to Labs.</p>
     </section>
   </main>
 
-  <footer class="glass">
-    <main style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:10px"><span class="logo"></span><span>© <span id="y"></span> NEBULA</span></div>
-      <div style="display:flex;gap:12px"><a href="#">Privacy</a><a href="#">Terms</a><a href="labs.html" data-xnav>Labs</a></div>
-    </main>
-  </footer>
-
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    const wrap = document.createElement('div');wrap.id='particles';wrap.className='particles';document.body.appendChild(wrap);
-    const N = 80; for(let i=0;i<N;i++){ const s=document.createElement('span'); s.className='p'; s.style.left=Math.random()*100+'vw'; s.style.top=(-10+Math.random()*110)+'vh'; s.style.setProperty('--t',(8+Math.random()*18)+'s'); wrap.appendChild(s); }
-    const io = new IntersectionObserver(entries=>{ for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } } },{threshold:.15});
-    document.querySelectorAll('.reveal, .glass.card, .glass.tile').forEach(el=>io.observe(el));
-    function softNavigate(href){
-      document.body.style.transition='opacity .25s ease';
-      document.body.style.opacity='0';
-      setTimeout(()=>{ window.location.href = href; }, 220);
+    // Parallax shards (with labeled badges)
+    const shardContainer = document.getElementById('parallax');
+    function addShard(x,y,w,h,label=null){
+      const s=document.createElement('div');
+      s.className='shard' + (label ? ' badge' : '');
+      s.style.width=w+'px'; s.style.height=h+'px';
+      s.style.left=x+'px'; s.style.top=y+'px';
+      if(label) s.textContent = label;
+      shardContainer.appendChild(s);
     }
-    document.querySelectorAll('[data-xnav]').forEach(a=>{
-      a.addEventListener('click', (e)=>{ e.preventDefault(); softNavigate(a.getAttribute('href')); });
+    // a few static shards + badges to make the change obvious
+    addShard(40, 120, 180, 80, 'NEBULA');
+    addShard(innerWidth-220, 180, 180, 80, 'GLASS');
+    addShard(120, innerHeight-180, 220, 110, 'PARALLAX');
+    for(let i=0;i<10;i++){
+      addShard(Math.random()*innerWidth,Math.random()*innerHeight,80+Math.random()*120,50+Math.random()*80);
+    }
+    document.addEventListener('mousemove',e=>{
+      const {clientX:x,clientY:y}=e;
+      document.querySelectorAll('.shard').forEach((shard,i)=>{
+        const depth = 0.04 + (i%7)*0.01;
+        const dx=(x/innerWidth-0.5)*-60*depth;
+        const dy=(y/innerHeight-0.5)*-60*depth;
+        shard.style.transform=`translate(${dx}px,${dy}px)`;
+      });
+    });
+
+    // Iris transition to Labs
+    const iris=document.getElementById('iris');
+    document.getElementById('enterLab').addEventListener('click',e=>{
+      e.preventDefault();
+      const rect=e.currentTarget.getBoundingClientRect();
+      const x=rect.left+rect.width/2;
+      const y=rect.top+rect.height/2;
+      iris.style.setProperty('--x',x+'px');
+      iris.style.setProperty('--y',y+'px');
+      iris.classList.add('active');
+      setTimeout(()=>{location.href='labs.html?v=BUILD_20250810_033029';},400);
     });
   </script>
 </body>
