@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>你的产品名称 – 简洁现代的着陆页</title>
+  <meta name="description" content="一个可复用的现代响应式着陆页模板，含导航、功能介绍、价格、FAQ 与联系表单。"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1020;           /* 深色背景 */
+      --panel: #11162a;        /* 卡片底色 */
+      --muted: #7a8599;        /* 次级文字 */
+      --text: #e8eefb;         /* 主文字 */
+      --brand: #6ea8fe;        /* 品牌主色 */
+      --brand-strong: #4f8dff; /* 品牌深色 */
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --ring: 0 0 0 3px rgba(110,168,254,.35);
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow-soft: 0 6px 20px rgba(0,0,0,.25);
+      --grid-max: 1200px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f7f9fc; --panel:#ffffff; --text:#0b1020; --muted:#6b7280; --shadow:0 10px 30px rgba(0,0,0,.08); --shadow-soft:0 6px 20px rgba(0,0,0,.06); }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; color:var(--text); background:radial-gradient(1200px 600px at 10% -10%, rgba(110,168,254,.25), transparent 60%), radial-gradient(800px 400px at 100% 10%, rgba(110,168,254,.15), transparent 60%), var(--bg);}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--grid-max); margin:0 auto; padding:0 20px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:calc(var(--radius) - 6px); font-weight:600; letter-spacing:.2px; border:1px solid transparent; background:linear-gradient(180deg, var(--brand), var(--brand-strong)); color:#fff; box-shadow:var(--shadow-soft); transition: transform .1s ease, box-shadow .2s ease, filter .2s ease}
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.05)}
+    .btn.ghost{background:transparent; color:var(--text); border-color:rgba(255,255,255,.15)}
+    .btn.small{padding:9px 14px; font-weight:600}
+    header.site{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0)); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; height:64px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px}
+    .logo{width:34px; height:34px; border-radius:10px; background: conic-gradient(from 200deg, var(--brand), #a78bfa, #34d399, var(--brand)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2), 0 6px 18px rgba(0,0,0,.2)}
+    nav ul{display:flex; gap:18px; list-style:none; padding:0; margin:0}
+    nav a{opacity:.9}
+    nav a:hover{opacity:1}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+
+    /* HERO */
+    .hero{padding:96px 0 40px}
+    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:48px; align-items:center}
+    .kicker{font-size:13px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--brand)}
+    h1{font-size: clamp(32px, 6vw, 56px); line-height:1.08; margin:.4em 0 .4em}
+    .sub{font-size: clamp(16px, 2.4vw, 20px); color:var(--muted); max-width:55ch}
+    .hero-cta{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap}
+    .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
+    .metric{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow)}
+    .metric b{font-size:24px}
+
+    .mock{position:relative; border-radius:var(--radius); overflow:hidden; background:linear-gradient(180deg, rgba(110,168,254,.15), rgba(110,168,254,.03)); border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow)}
+    .mock .topbar{display:flex; gap:8px; padding:10px; background:rgba(0,0,0,.25); border-bottom:1px solid rgba(255,255,255,.06)}
+    .dot{width:10px;height:10px;border-radius:50%; background:rgba(255,255,255,.3)}
+    .mock img{width:100%; display:block; aspect-ratio: 16/10; object-fit:cover}
+
+    /* FEATURES */
+    .section{padding:72px 0}
+    .section h2{font-size: clamp(26px, 5vw, 40px); margin:0 0 12px}
+    .lead{color:var(--muted)}
+    .features{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:28px}
+    .card{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px}
+    .icon{width:36px; height:36px; border-radius:10px; background: radial-gradient(circle at 30% 30%, #fff8, #fff0), linear-gradient(135deg, var(--brand), #a78bfa); display:inline-flex; align-items:center; justify-content:center; font-weight:800}
+    .card p{color:var(--muted)}
+
+    /* PRICING */
+    .pricing{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:28px}
+    .price-card{position:relative}
+    .badge{position:absolute; right:16px; top:-10px; background:var(--ok); color:#fff; font-weight:700; border-radius:999px; font-size:12px; padding:6px 10px; box-shadow:var(--shadow-soft)}
+    .price{display:flex; align-items:end; gap:6px; margin:8px 0 2px}
+    .price strong{font-size:40px}
+    .list{display:grid; gap:8px; margin:14px 0}
+    .list li{list-style:'✓  '; padding-left:8px; color:var(--muted)}
+
+    /* TESTIMONIALS */
+    .testis{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:28px}
+    .quote{font-size:16px; color:var(--muted)}
+    .who{display:flex; align-items:center; gap:10px; margin-top:10px}
+    .avatar{width:34px; height:34px; border-radius:50%; background: linear-gradient(135deg,#a78bfa,#34d399)}
+
+    /* FAQ */
+    details{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow)}
+    details+details{margin-top:12px}
+    summary{cursor:pointer; font-weight:600}
+    summary::-webkit-details-marker{display:none}
+
+    /* CONTACT */
+    form{display:grid; gap:12px; margin-top:16px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    input, textarea, select{width:100%; padding:12px 14px; background:transparent; color:var(--text); border-radius:12px; border:1px solid rgba(255,255,255,.14); outline:none}
+    input:focus, textarea:focus, select:focus{box-shadow:var(--ring); border-color:var(--brand)}
+    textarea{min-height:120px; resize:vertical}
+
+    footer{border-top:1px solid rgba(255,255,255,.08); padding:28px 0; color:var(--muted)}
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .features, .pricing, .testis{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      nav ul{display:none}
+      .features, .pricing, .testis{grid-template-columns:1fr}
+      .metrics{grid-template-columns:1fr 1fr}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav" role="navigation" aria-label="主导航">
+      <a class="brand" href="#home" aria-label="主页">
+        <span class="logo" aria-hidden="true"></span>
+        <span>你的产品名称</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#features">功能</a></li>
+          <li><a href="#pricing">价格</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">联系</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn ghost small" href="#">登录</a>
+        <a class="btn small" href="#cta">立即试用</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">全新上线</p>
+          <h1 id="hero-title">用更少时间，发布更好产品</h1>
+          <p class="sub">这是一段简短的价值主张：用一句话告诉访客你解决了什么问题，能带来怎样的核心收益，以及为何与众不同。</p>
+          <div class="hero-cta">
+            <a class="btn" href="#cta" aria-label="开始免费试用">免费开始 →</a>
+            <a class="btn ghost" href="#features" aria-label="查看功能">了解功能</a>
+          </div>
+          <div class="metrics" aria-label="关键指标">
+            <div class="metric"><div>上线速度提升</div><b>3×</b></div>
+            <div class="metric"><div>团队节省成本</div><b>42%</b></div>
+            <div class="metric"><div>客户满意度</div><b>98%</b></div>
+          </div>
+        </div>
+        <div class="mock" aria-label="产品界面预览">
+          <div class="topbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <!-- 纯 SVG 占位插图，可换成你的截图 -->
+          <img alt="产品界面预览插图" src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='750'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%236ea8fe'/><stop offset='1' stop-color='%23a78bfa'/></linearGradient></defs><rect width='1200' height='750' fill='%2311162a'/><g fill='url(%23g)' opacity='.8'><rect x='60' y='60' rx='16' ry='16' width='1080' height='120'/><rect x='60' y='220' rx='16' ry='16' width='520' height='180'/><rect x='620' y='220' rx='16' ry='16' width='520' height='180'/><rect x='60' y='420' rx='16' ry='16' width='1080' height='260'/></g></svg>">        
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section" aria-labelledby="features-title">
+      <h2 id="features-title">强大功能，一站集成</h2>
+      <p class="lead">覆盖从想法到上线的每一步，开箱即用，开发者与运营都能轻松上手。</p>
+      <div class="features" role="list">
+        <article class="card" role="listitem">
+          <span class="icon" aria-hidden="true">⚡</span>
+          <h3>极速工作流</h3>
+          <p>自动化构建与部署，支持主流框架与云服务，零配置上云。</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="icon" aria-hidden="true">🔒</span>
+          <h3>企业级安全</h3>
+          <p>内置访问控制、审计日志与数据加密，放心合规。</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="icon" aria-hidden="true">📊</span>
+          <h3>可观测性</h3>
+          <p>实时仪表盘、告警与追踪，问题定位事半功倍。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section" aria-labelledby="pricing-title">
+      <h2 id="pricing-title">透明定价，随用随扩</h2>
+      <p class="lead">免费计划已足够开始；业务增长时随时升级。</p>
+      <div class="pricing">
+        <article class="card price-card">
+          <div class="badge" aria-label="推荐标签" style="background:transparent;color:var(--brand);border:1px solid rgba(255,255,255,.15)">入门</div>
+          <h3>Free</h3>
+          <div class="price"><strong>¥0</strong><span>/ 月</span></div>
+          <ul class="list">
+            <li>单人使用</li>
+            <li>100 次/月 API 调用</li>
+            <li>社区支持</li>
+          </ul>
+          <a class="btn ghost" href="#cta">开始</a>
+        </article>
+        <article class="card price-card">
+          <div class="badge">最受欢迎</div>
+          <h3>Pro</h3>
+          <div class="price"><strong>¥69</strong><span>/ 月</span></div>
+          <ul class="list">
+            <li>最多 5 位成员</li>
+            <li>无限项目与环境</li>
+            <li>优先支持</li>
+          </ul>
+          <a class="btn" href="#cta">试用 Pro</a>
+        </article>
+        <article class="card price-card">
+          <div class="badge" style="background:var(--warn)">成长团队</div>
+          <h3>Team</h3>
+          <div class="price"><strong>¥199</strong><span>/ 月</span></div>
+          <ul class="list">
+            <li>无限成员</li>
+            <li>SSO / SAML</li>
+            <li>专属客户成功</li>
+          </ul>
+          <a class="btn ghost" href="#cta">联系销售</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section" aria-labelledby="social-proof">
+      <h2 id="social-proof">受到成长型团队信赖</h2>
+      <div class="testis">
+        <article class="card">
+          <p class="quote">“这套流程让我们从概念到上线缩短了一半时间。”</p>
+          <div class="who"><span class="avatar" aria-hidden="true"></span><div><b>林楠</b><div class="muted">产品总监 · Acme</div></div></div>
+        </article>
+        <article class="card">
+          <p class="quote">“简单强大，几分钟就能搭建出可用环境。”</p>
+          <div class="who"><span class="avatar" aria-hidden="true"></span><div><b>周璐</b><div class="muted">工程经理 · Orbit</div></div></div>
+        </article>
+        <article class="card">
+          <p class="quote">“价格实在，配套的可观测性做得很贴心。”</p>
+          <div class="who"><span class="avatar" aria-hidden="true"></span><div><b>陈易</b><div class="muted">创始人 · Nova</div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <h2 id="faq-title">常见问题</h2>
+      <details>
+        <summary>需要绑定信用卡吗？</summary>
+        <p>使用免费计划无需绑定；升级到付费计划时再添加即可。</p>
+      </details>
+      <details>
+        <summary>是否支持企业私有化部署？</summary>
+        <p>支持。我们提供上门交付与 SLA，请联系销售获取详情。</p>
+      </details>
+      <details>
+        <summary>有公开的 API 吗？</summary>
+        <p>当然，REST 与 Webhook 均已覆盖，SDK 提供 TS / Python。</p>
+      </details>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <h2 id="contact-title">联系我们</h2>
+      <p class="lead">告诉我们你的场景，我们会在 1–2 个工作日内回复。</p>
+      <form onsubmit="event.preventDefault(); alert('已提交！(演示表单)')" aria-label="联系表单">
+        <div class="row">
+          <label>
+            <span class="muted">姓名</span>
+            <input required name="name" placeholder="王小明" />
+          </label>
+          <label>
+            <span class="muted">邮箱</span>
+            <input required type="email" name="email" placeholder="you@example.com" />
+          </label>
+        </div>
+        <label>
+          <span class="muted">主题</span>
+          <select name="topic">
+            <option>产品咨询</option>
+            <option>技术支持</option>
+            <option>商务合作</option>
+          </select>
+        </label>
+        <label>
+          <span class="muted">你的需求</span>
+          <textarea name="message" placeholder="请简要描述你的场景或问题……"></textarea>
+        </label>
+        <div class="hero-cta">
+          <button class="btn" type="submit">发送</button>
+          <a class="btn ghost" href="#home">返回顶部</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap">
+        <div style="display:flex; align-items:center; gap:12px">
+          <span class="logo" aria-hidden="true"></span>
+          <span>© <span id="y"></span> 你的公司</span>
+        </div>
+        <nav aria-label="页脚链接">
+          <a href="#" style="margin-right:12px">隐私</a>
+          <a href="#" style="margin-right:12px">条款</a>
+          <a href="#">状态</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 年份自动更新
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
